@@ -41,7 +41,9 @@ def optimize_preds(preds, labels=None, thresh=None, return_thresh=False, print_r
         return thresh
     return preds
 
-fn2label = {fn: cancer_or_not for fn, cancer_or_not in zip(train_csv['image_id'].astype('str'), train_csv['cancer'])}
+def fn2label():
+    raise NotImplemented
+    return {fn: cancer_or_not for fn, cancer_or_not in zip(train_csv['image_id'].astype('str'), train_csv['cancer'])}
 
 def splitting_func(paths):
     train = []
@@ -61,7 +63,7 @@ def get_items(image_dir_path):
     items = []
     for p in get_image_files(image_dir_path):
         items.append(p)
-        if p.stem in fn2label and int(p.parent.name) in patient_id_any_cancer.iloc[splits[SPLIT][0]].patient_id.values:
+        if p.stem in fn2label() and int(p.parent.name) in patient_id_any_cancer.iloc[splits[SPLIT][0]].patient_id.values:
     
             if label_func(p) == 1:
                 #this seems odd; if cancer, append 5 pictures?
